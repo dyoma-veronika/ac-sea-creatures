@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="ac.seacreature.acseacreatures.presentation.ui.detailed_screen.SeaCreatureDetailsViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerFrameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                app:showOnSuccess="@{viewModel.uiState}">
+
+                <include layout="@layout/shimmer_fragment_seacreature_detail" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal_top"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_start"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <ImageView
+                android:id="@+id/sea_creature_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@id/barrier_horizontal"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toTopOf="@id/guideline_horizontal_top"
+                app:loadingImage="@{viewModel.seaCreature.imageUri}"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_horizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="sea_creature_image" />
+
+            <TextView
+                android:id="@+id/sea_creature_name_ru"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{viewModel.seaCreature.nameEuRu}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_name_en"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_image"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:text="Sea Creature" />
+
+            <TextView
+                android:id="@+id/sea_creature_name_en"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="@{viewModel.seaCreature.nameUsEn}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_price"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_name_ru"
+                tools:text="Sea Creature" />
+
+            <TextView
+                android:id="@+id/sea_creature_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="@{String.valueOf(viewModel.seaCreature.price)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_speed"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_name_en"
+                tools:text="1700" />
+
+            <TextView
+                android:id="@+id/sea_creature_speed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="@{viewModel.seaCreature.speed}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_shadow"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_price"
+                tools:text="Speed" />
+
+            <TextView
+                android:id="@+id/sea_creature_shadow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="@{viewModel.seaCreature.shadow}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_catch_phrase"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_speed"
+                tools:text="Shadow" />
+
+            <TextView
+                android:id="@+id/sea_creature_catch_phrase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="@{viewModel.seaCreature.catchPhrase}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toTopOf="@id/sea_creature_museum_phrase"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_shadow"
+                tools:text="Catch phrase" />
+
+            <TextView
+                android:id="@+id/sea_creature_museum_phrase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{viewModel.seaCreature.museumPhrase}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_bottom"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/sea_creature_name_ru"
+                app:layout_constraintTop_toBottomOf="@id/sea_creature_catch_phrase"
+                tools:text="Museum phrase" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal_bottom"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="16dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

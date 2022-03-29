@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="ac.seacreature.acseacreatures.presentation.ui.main_screen.MainScreenViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.main_screen.MainScreenFragment">
+
+        <TextView
+            android:id="@+id/error_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/material_on_surface_stroke"
+            android:textAlignment="center"
+            app:showOnError="@{viewModel.uiState}" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:showOnLoading="@{viewModel.uiState}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+                <include layout="@layout/shimmer_sea_creature_item" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{viewModel.listener}"
+            app:refreshing="@{viewModel.isLoading}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sea_creatures"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:items="@{viewModel.seaCreatures}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showOnRV="@{viewModel.uiState}"
+                tools:listitem="@layout/sea_creature_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

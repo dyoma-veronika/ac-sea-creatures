@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ACSeaCreatures</string>
+    <string name="null_body_exception">Тело отсутствует</string>
+    <string name="json_parse_exception">Ошибка преобразования Json</string>
+    <string name="io_exception">Ошибка ввода-вывода</string>
+    <string name="client_exception">Ошибка клиента</string>
+    <string name="server_exception">Ошибка сервера</string>
+    <string name="unknowing_error">Неизвестная ошибка</string>
+    <string name="download_button">Загрузить</string>
+</resources>
